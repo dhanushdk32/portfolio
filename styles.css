@@ -344,6 +344,7 @@ img {
 .title-gradient {
   background: linear-gradient(135deg, #ffffff 40%, #8899ac 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -408,31 +409,32 @@ img {
 .portrait-wrapper {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .portrait-aura {
   position: absolute;
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(56, 189, 248, 0.04) 50%, transparent 70%);
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.09) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 70%);
   border-radius: 50%;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  filter: blur(40px);
+  filter: blur(45px);
   z-index: 1;
 }
 
 .portrait-ring {
   position: absolute;
-  width: 420px;
-  height: 420px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 460px;
+  height: 460px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 50%;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -442,34 +444,31 @@ img {
 .portrait-card {
   position: relative;
   z-index: 2;
-  border-radius: 28px;
-  overflow: hidden;
-  background: #11141b;
-  border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-subtle), var(--shadow-glow);
-  aspect-ratio: 9/12;
   width: 100%;
-  max-width: 380px;
+  max-width: 460px;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
 }
 
 .portrait-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  filter: contrast(1.03) brightness(0.98);
+  max-width: 440px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7));
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.portrait-card:hover .portrait-img {
-  transform: scale(1.03);
+.portrait-wrapper:hover .portrait-img {
+  transform: scale(1.02);
 }
 
 .portrait-gradient-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 65%, rgba(10, 12, 17, 0.85) 100%);
-  pointer-events: none;
+  display: none;
 }
 
 /* Floating Hero Badge */
@@ -1231,6 +1230,7 @@ img {
 .cta-highlight {
   background: linear-gradient(90deg, #ffffff, #94a3b8);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
