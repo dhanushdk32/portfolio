@@ -400,6 +400,8 @@ img {
   gap: 20px;
   width: 100%;
   min-width: 0;
+  position: relative;
+  z-index: 5;
 }
 
 .hero-eyebrow {
@@ -432,29 +434,28 @@ img {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 5.2vw, 4.8rem);
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
   font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: var(--text-pure);
   text-transform: uppercase;
-  height: 2.1em;
-  overflow: hidden;
-  margin-bottom: 4px;
+  min-height: 2.15em;
+  margin-bottom: 6px;
 }
 
 .title-line {
   display: block;
-  height: 1em;
-  line-height: 1;
+  min-height: 1.05em;
+  line-height: 1.05;
 }
 
 .dynamic-role-wrapper {
-  display: inline-block;
-  height: 1em;
-  line-height: 1;
+  display: inline-flex;
+  align-items: baseline;
+  min-height: 1.05em;
+  line-height: 1.05;
   white-space: nowrap;
-  width: 100%;
 }
 
 .title-gradient {
