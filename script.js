@@ -115,10 +115,10 @@ function initRoleTyping() {
 
   const roles = [
     "ENGINEER",
-    "LLM ARCHITECT",
-    "DATA SCIENTIST",
-    "DEEP LEARNING PRO",
-    "FASTAPI DEVELOPER"
+    "ARCHITECT",
+    "SCIENTIST",
+    "DEVELOPER",
+    "SPECIALIST"
   ];
 
   let roleIndex = 0;
