@@ -1,6 +1,7 @@
 /**
- * Dhanush Kumar D - Portfolio Interactions
- * Handles navigation, stats animation, project modals, contact modal, and clipboard utilities.
+ * Dhanush Kumar D - Portfolio Professional Animations & Interactions
+ * Features: AI Neural Background, Cursor Spotlight, Scroll Reveal, 3D Card Tilt,
+ * Dynamic Role Typing, Scroll Progress Bar, Project Modals & Clipboard Utilities.
  */
 
 // Project database for interactive modal walkthroughs
@@ -54,7 +55,14 @@ const projectData = {
 document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
   initHeaderScroll();
+  initScrollProgress();
+  initScrollReveal();
   initStatsObserver();
+  initRoleTyping();
+  initCursorSpotlight();
+  initNeuralCanvas();
+  init3DTilt();
+  initProcessCycle();
   setCurrentYear();
 });
 
@@ -66,7 +74,256 @@ function setCurrentYear() {
   }
 }
 
-// Mobile Navigation Toggle
+// 1. Scroll Progress Bar
+function initScrollProgress() {
+  const progressBar = document.getElementById("scrollProgressBar");
+  if (!progressBar) return;
+
+  window.addEventListener("scroll", () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (totalHeight > 0) {
+      const progress = (window.scrollY / totalHeight) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+  });
+}
+
+// 2. Scroll Reveal Animations (IntersectionObserver)
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll(".reveal-on-scroll");
+  if (!revealElements.length) return;
+
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  revealElements.forEach(el => revealObserver.observe(el));
+}
+
+// 3. Dynamic Typing / Role Switcher in Hero Title
+function initRoleTyping() {
+  const roleEl = document.getElementById("dynamicRole");
+  if (!roleEl) return;
+
+  const roles = [
+    "ENGINEER",
+    "LLM ARCHITECT",
+    "DATA SCIENTIST",
+    "DEEP LEARNING PRO",
+    "FASTAPI DEVELOPER"
+  ];
+
+  let roleIndex = 0;
+  let charIndex = roles[0].length;
+  let isDeleting = true;
+  let typingSpeed = 100;
+
+  function typeStep() {
+    const currentRole = roles[roleIndex];
+
+    if (isDeleting) {
+      charIndex--;
+      roleEl.textContent = currentRole.substring(0, charIndex);
+      typingSpeed = 50;
+    } else {
+      charIndex++;
+      roleEl.textContent = currentRole.substring(0, charIndex);
+      typingSpeed = 100;
+    }
+
+    if (!isDeleting && charIndex === currentRole.length) {
+      // Pause at full word
+      typingSpeed = 2400;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+      typingSpeed = 400;
+    }
+
+    setTimeout(typeStep, typingSpeed);
+  }
+
+  // Start after initial delay
+  setTimeout(typeStep, 2500);
+}
+
+// 4. Interactive Cursor Spotlight (Mouse Glow)
+function initCursorSpotlight() {
+  const spotlight = document.getElementById("cursorSpotlight");
+  if (!spotlight || window.innerWidth < 768) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let currentX = mouseX;
+  let currentY = mouseY;
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateSpotlight() {
+    currentX += (mouseX - currentX) * 0.12;
+    currentY += (mouseY - currentY) * 0.12;
+    spotlight.style.left = `${currentX}px`;
+    spotlight.style.top = `${currentY}px`;
+    requestAnimationFrame(animateSpotlight);
+  }
+
+  animateSpotlight();
+}
+
+// 5. Interactive AI Neural Node Background Canvas
+function initNeuralCanvas() {
+  const canvas = document.getElementById("neuralCanvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  let mouse = { x: -1000, y: -1000, radius: 150 };
+
+  window.addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  window.addEventListener("mouseleave", () => {
+    mouse.x = -1000;
+    mouse.y = -1000;
+  });
+
+  window.addEventListener("resize", () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    createNodes();
+  });
+
+  const nodeCount = Math.min(50, Math.floor((width * height) / 28000));
+  let nodes = [];
+
+  function createNodes() {
+    nodes = [];
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        radius: Math.random() * 1.8 + 1,
+        alpha: Math.random() * 0.5 + 0.2
+      });
+    }
+  }
+
+  createNodes();
+
+  function drawNeuralNetwork() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Update & draw nodes
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
+
+      node.x += node.vx;
+      node.y += node.vy;
+
+      if (node.x < 0 || node.x > width) node.vx *= -1;
+      if (node.y < 0 || node.y > height) node.vy *= -1;
+
+      // Mouse gentle interaction
+      const dx = mouse.x - node.x;
+      const dy = mouse.y - node.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < mouse.radius) {
+        const force = (1 - dist / mouse.radius) * 0.8;
+        node.x -= (dx / dist) * force;
+        node.y -= (dy / dist) * force;
+      }
+
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(56, 189, 248, ${node.alpha * 0.8})`;
+      ctx.fill();
+
+      // Connect nearby nodes
+      for (let j = i + 1; j < nodes.length; j++) {
+        const nodeB = nodes[j];
+        const distance = Math.hypot(node.x - nodeB.x, node.y - nodeB.y);
+
+        if (distance < 130) {
+          const lineAlpha = (1 - distance / 130) * 0.15;
+          ctx.beginPath();
+          ctx.moveTo(node.x, node.y);
+          ctx.lineTo(nodeB.x, nodeB.y);
+          ctx.strokeStyle = `rgba(165, 180, 252, ${lineAlpha})`;
+          ctx.lineWidth = 0.75;
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(drawNeuralNetwork);
+  }
+
+  drawNeuralNetwork();
+}
+
+// 6. 3D Interactive Tilt on Cards
+function init3DTilt() {
+  if (window.innerWidth < 1024) return; // Disable on mobile/touch devices for smooth performance
+
+  const tiltCards = document.querySelectorAll("[data-tilt]");
+  tiltCards.forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -6;
+      const rotateY = ((x - centerX) / centerX) * 6;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
+    });
+  });
+}
+
+// 7. Active Process Flow Pipeline Cycle
+function initProcessCycle() {
+  const steps = document.querySelectorAll(".process-step");
+  if (!steps.length) return;
+
+  let currentStep = 0;
+  setInterval(() => {
+    steps.forEach((step, index) => {
+      if (index === currentStep) {
+        step.classList.add("step-active");
+      } else {
+        step.classList.remove("step-active");
+      }
+    });
+    currentStep = (currentStep + 1) % steps.length;
+  }, 2600);
+}
+
+// 8. Mobile Navigation Toggle
 function initMobileNav() {
   const toggleBtn = document.getElementById("mobileToggle");
   const navMenu = document.getElementById("navMenu");
@@ -85,23 +342,23 @@ function initMobileNav() {
   }
 }
 
-// Header Scroll Effect
+// 9. Header Scroll Effect
 function initHeaderScroll() {
   const header = document.getElementById("siteHeader");
   window.addEventListener("scroll", () => {
     if (window.scrollY > 50) {
       header.style.padding = "14px 0";
-      header.style.background = "rgba(10, 12, 17, 0.92)";
+      header.style.background = "rgba(10, 12, 17, 0.94)";
       header.style.borderBottomColor = "rgba(255, 255, 255, 0.08)";
     } else {
       header.style.padding = "20px 0";
-      header.style.background = "rgba(10, 12, 17, 0.7)";
+      header.style.background = "rgba(10, 12, 17, 0.75)";
       header.style.borderBottomColor = "rgba(255, 255, 255, 0.04)";
     }
   });
 }
 
-// Stats Counter Animation
+// 10. Stats Counter Animation
 function initStatsObserver() {
   const statsBar = document.getElementById("statsBar");
   if (!statsBar) return;
@@ -126,7 +383,6 @@ function animateStats() {
     if (!rawTarget) return;
 
     if (rawTarget.includes(".")) {
-      // Float
       const target = parseFloat(rawTarget);
       let current = 0;
       const step = target / 30;
@@ -140,7 +396,6 @@ function animateStats() {
         }
       }, 30);
     } else {
-      // Integer with possible plus
       const hasPlus = stat.textContent.includes("+");
       const target = parseInt(rawTarget, 10);
       let current = 0;
@@ -203,7 +458,7 @@ function openProjectModal(projectId) {
     </div>
 
     <div style="display: flex; gap: 14px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--border-glass);">
-      <a href="${data.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.8rem;">
+      <a href="${data.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-shimmer" style="padding: 10px 22px; font-size: 0.8rem;">
         <span>VIEW REPOSITORY</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
       </a>

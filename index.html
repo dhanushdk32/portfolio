@@ -15,7 +15,7 @@
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif' fill='%23ffffff'>DK</text></svg>">
 
-  <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+  <!-- Google Fonts: Syne, Plus Jakarta Sans & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -27,13 +27,20 @@
 
 <body>
 
+  <!-- Interactive AI Neural Background Canvas -->
+  <canvas id="neuralCanvas" class="neural-canvas"></canvas>
+
+  <!-- Interactive Cursor Spotlight Glow -->
+  <div class="cursor-spotlight" id="cursorSpotlight"></div>
+
   <!-- Ambient Light Effects -->
   <div class="ambient-glow glow-top-left"></div>
   <div class="ambient-glow glow-top-right"></div>
   <div class="ambient-glow glow-center"></div>
 
-  <!-- Global Header / Navigation -->
+  <!-- Global Header / Navigation with Scroll Progress Bar -->
   <header class="site-header" id="siteHeader">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
     <div class="container nav-container">
       <a href="#hero" class="brand-logo" aria-label="Home">
         <span class="logo-serif">DK</span>
@@ -71,7 +78,7 @@
     <!-- HERO SECTION -->
     <section class="hero-section" id="hero">
       <div class="container hero-grid">
-        <div class="hero-content">
+        <div class="hero-content reveal-on-scroll">
           <div class="hero-eyebrow">
             <span class="sparkle-icon">✦</span>
             <span>INTELLIGENT AI & MACHINE LEARNING SYSTEMS</span>
@@ -79,7 +86,9 @@
 
           <h1 class="hero-title">
             <span class="title-line">AI & ML</span>
-            <span class="title-line title-gradient">ENGINEER</span>
+            <span class="title-line title-gradient dynamic-role-wrapper">
+              <span id="dynamicRole">ENGINEER</span><span class="typing-cursor">|</span>
+            </span>
           </h1>
 
           <p class="hero-description">
@@ -88,7 +97,7 @@
           </p>
 
           <div class="hero-cta-group">
-            <a href="#work" class="btn btn-primary" id="btnViewWork">
+            <a href="#work" class="btn btn-primary btn-shimmer" id="btnViewWork">
               <span>VIEW MY WORK</span>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -116,7 +125,7 @@
           </div>
         </div>
 
-        <div class="hero-visual">
+        <div class="hero-visual reveal-on-scroll" style="transition-delay: 0.2s;">
           <div class="portrait-wrapper">
             <div class="portrait-aura"></div>
             <div class="portrait-ring"></div>
@@ -148,7 +157,7 @@
 
       <!-- KEY STATS / METRICS BAR -->
       <div class="container">
-        <div class="stats-bar glass-panel" id="statsBar">
+        <div class="stats-bar glass-panel reveal-on-scroll" id="statsBar">
           <div class="stat-item">
             <div class="stat-icon-wrapper">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -217,7 +226,7 @@
     <!-- FEATURED WORK SECTION -->
     <section class="section-container" id="work">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header reveal-on-scroll">
           <div>
             <span class="section-tag">PORTFOLIO SHOWCASE</span>
             <h2 class="section-title">FEATURED WORK</h2>
@@ -233,7 +242,7 @@
 
         <div class="projects-grid">
           <!-- Project 1: Smart Car Parking -->
-          <article class="project-card" data-project="parking">
+          <article class="project-card reveal-on-scroll" data-tilt data-project="parking">
             <div class="project-preview-wrap">
               <img src="assets/project_parking.png" alt="Smart Car Parking Management" class="project-preview-img">
               <div class="project-badge">MACHINE LEARNING • IOT</div>
@@ -268,7 +277,7 @@
           </article>
 
           <!-- Project 2: Chat PDF LLM -->
-          <article class="project-card" data-project="chatpdf">
+          <article class="project-card reveal-on-scroll" data-tilt data-project="chatpdf" style="transition-delay: 0.15s;">
             <div class="project-preview-wrap">
               <img src="assets/project_chatpdf.png" alt="Chat PDF Conversational AI" class="project-preview-img">
               <div class="project-badge">GENERATIVE AI • LLM • RAG</div>
@@ -303,7 +312,7 @@
           </article>
 
           <!-- Project 3: AI Resume Screening -->
-          <article class="project-card" data-project="resume">
+          <article class="project-card reveal-on-scroll" data-tilt data-project="resume" style="transition-delay: 0.3s;">
             <div class="project-preview-wrap">
               <img src="assets/project_resume.png" alt="AI Resume Screening System" class="project-preview-img">
               <div class="project-badge">NLP • CANDIDATE MATCHING</div>
@@ -345,12 +354,14 @@
         <div class="capabilities-layout">
           <!-- LEFT COLUMN: CORE CAPABILITIES -->
           <div class="capabilities-left">
-            <span class="section-tag">TECHNICAL PROFICIENCIES</span>
-            <h2 class="section-title">CORE CAPABILITIES</h2>
+            <div class="reveal-on-scroll">
+              <span class="section-tag">TECHNICAL PROFICIENCIES</span>
+              <h2 class="section-title">CORE CAPABILITIES</h2>
+            </div>
 
             <div class="capabilities-grid">
               <!-- Cap 1 -->
-              <div class="capability-card">
+              <div class="capability-card reveal-on-scroll" data-tilt>
                 <div class="cap-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
@@ -366,7 +377,7 @@
               </div>
 
               <!-- Cap 2 -->
-              <div class="capability-card">
+              <div class="capability-card reveal-on-scroll" data-tilt style="transition-delay: 0.1s;">
                 <div class="cap-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -380,7 +391,7 @@
               </div>
 
               <!-- Cap 3 -->
-              <div class="capability-card">
+              <div class="capability-card reveal-on-scroll" data-tilt style="transition-delay: 0.15s;">
                 <div class="cap-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
@@ -395,7 +406,7 @@
               </div>
 
               <!-- Cap 4 -->
-              <div class="capability-card">
+              <div class="capability-card reveal-on-scroll" data-tilt style="transition-delay: 0.2s;">
                 <div class="cap-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="16 18 22 12 16 6"></polyline>
@@ -410,7 +421,7 @@
               </div>
 
               <!-- Cap 5 -->
-              <div class="capability-card">
+              <div class="capability-card reveal-on-scroll" data-tilt style="transition-delay: 0.25s;">
                 <div class="cap-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
@@ -426,7 +437,7 @@
               </div>
 
               <!-- Cap 6 -->
-              <div class="capability-card">
+              <div class="capability-card reveal-on-scroll" data-tilt style="transition-delay: 0.3s;">
                 <div class="cap-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
@@ -446,7 +457,7 @@
           <!-- RIGHT COLUMN: TOOLS & TECHNOLOGIES + EDUCATION -->
           <div class="capabilities-right">
             <!-- Tools Box -->
-            <div class="glass-box">
+            <div class="glass-box reveal-on-scroll">
               <h3 class="box-title">TOOLS & TECHNOLOGIES</h3>
 
               <div class="tech-stack-grid">
@@ -525,7 +536,7 @@
             </div>
 
             <!-- Education & Certifications Box -->
-            <div class="glass-box" id="education">
+            <div class="glass-box reveal-on-scroll" id="education" style="transition-delay: 0.15s;">
               <h3 class="box-title">EDUCATION & CERTIFICATIONS</h3>
 
               <div class="edu-list">
@@ -586,7 +597,7 @@
     <!-- INTERNSHIPS & EXPERIENCE SECTION -->
     <section class="section-container" id="experience">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header reveal-on-scroll">
           <div>
             <span class="section-tag">PROFESSIONAL JOURNEY</span>
             <h2 class="section-title">INTERNSHIPS & EXPERIENCE</h2>
@@ -596,7 +607,7 @@
 
         <div class="experience-grid">
           <!-- Internship 1 -->
-          <div class="experience-card">
+          <div class="experience-card reveal-on-scroll" data-tilt>
             <div class="exp-header">
               <div>
                 <span class="exp-company">Cognifyz Technologies</span>
@@ -622,7 +633,7 @@
           </div>
 
           <!-- Internship 2 -->
-          <div class="experience-card">
+          <div class="experience-card reveal-on-scroll" data-tilt style="transition-delay: 0.15s;">
             <div class="exp-header">
               <div>
                 <span class="exp-company">Bevywise Networks</span>
@@ -631,13 +642,12 @@
               <span class="exp-duration">Internship</span>
             </div>
             <p class="exp-summary">
-              Engineered core algorithms for the Smart Car Parking System combining real-time machine learning
-              predictions with image processing for automated slot detection.
+              Engineered core algorithms for the Smart Car Parking System combining real-time machine learning predictions
+              with image processing for automated slot detection.
             </p>
             <ul class="exp-bullet-list">
               <li>Integrated image processing pipelines to identify available parking slots in real time.</li>
-              <li>Developed predictive modeling algorithms factoring historical congestion and time-of-day variables.
-              </li>
+              <li>Developed predictive modeling algorithms factoring historical congestion and time-of-day variables.</li>
               <li>Interfaced backend telemetry with API endpoints for seamless operational status delivery.</li>
             </ul>
             <div class="exp-tags">
@@ -654,16 +664,16 @@
     <!-- ENGINEERING PROCESS (5 STEPS LIKE REFERENCE) -->
     <section class="section-container" id="process">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header reveal-on-scroll">
           <div>
             <span class="section-tag">METHODOLOGY</span>
             <h2 class="section-title">MY ML ENGINEERING PROCESS</h2>
           </div>
         </div>
 
-        <div class="process-flow">
+        <div class="process-flow reveal-on-scroll">
           <!-- Step 1 -->
-          <div class="process-step">
+          <div class="process-step" data-step="1">
             <div class="step-num">01</div>
             <h4 class="step-title">DISCOVER</h4>
             <p class="step-desc">Problem framing, domain analysis, KPI definition, and scoping data requirements.</p>
@@ -676,11 +686,10 @@
           </div>
 
           <!-- Step 2 -->
-          <div class="process-step">
+          <div class="process-step" data-step="2">
             <div class="step-num">02</div>
             <h4 class="step-title">PREPROCESS</h4>
-            <p class="step-desc">Data cleaning, NLP parsing, embeddings generation, and feature engineering pipelines.
-            </p>
+            <p class="step-desc">Data cleaning, NLP parsing, embeddings generation, and feature engineering pipelines.</p>
             <div class="step-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="10"></circle>
@@ -691,7 +700,7 @@
           </div>
 
           <!-- Step 3 -->
-          <div class="process-step">
+          <div class="process-step" data-step="3">
             <div class="step-num">03</div>
             <h4 class="step-title">MODEL & TRAIN</h4>
             <p class="step-desc">Algorithm selection, hyperparameter tuning, model evaluation, and cross-validation.</p>
@@ -704,7 +713,7 @@
           </div>
 
           <!-- Step 4 -->
-          <div class="process-step">
+          <div class="process-step" data-step="4">
             <div class="step-num">04</div>
             <h4 class="step-title">DEPLOY & SERVE</h4>
             <p class="step-desc">FastAPI microservice endpoints, database integrations, and UI connecting layers.</p>
@@ -717,7 +726,7 @@
           </div>
 
           <!-- Step 5 -->
-          <div class="process-step">
+          <div class="process-step" data-step="5">
             <div class="step-num">05</div>
             <h4 class="step-title">OPTIMIZE</h4>
             <p class="step-desc">Performance benchmarking, accuracy validation, scaling, and documentation.</p>
@@ -725,8 +734,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z">
                 </path>
-                <path
-                  d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z">
+                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z">
                 </path>
               </svg>
             </div>
@@ -738,7 +746,7 @@
     <!-- CALL TO ACTION (CTA BANNER MATCHING REFERENCE) -->
     <section class="section-container" id="contact">
       <div class="container">
-        <div class="cta-banner">
+        <div class="cta-banner reveal-on-scroll" data-tilt>
           <div class="cta-mesh-bg"></div>
 
           <div class="cta-left">
@@ -755,7 +763,7 @@
               I'm actively available for Machine Learning Engineer, Data Scientist, and AI Developer opportunities &
               projects.
             </p>
-            <button class="btn btn-cta" onclick="openContactModal()">
+            <button class="btn btn-cta btn-shimmer" onclick="openContactModal()">
               <span>LET'S WORK TOGETHER</span>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
@@ -896,7 +904,7 @@
             <textarea id="contactMessage" rows="4" required
               placeholder="Tell me about the role, project scope, or opportunity..."></textarea>
           </div>
-          <button type="submit" class="btn btn-primary btn-block" id="btnSubmitMessage">
+          <button type="submit" class="btn btn-primary btn-block btn-shimmer" id="btnSubmitMessage">
             <span>SEND MESSAGE</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <line x1="22" y1="2" x2="11" y2="13"></line>
