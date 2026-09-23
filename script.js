@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initRoleTyping();
   initCursorSpotlight();
   initNeuralCanvas();
+  init3DSkillSphere();
   init3DTilt();
   initProcessCycle();
   setCurrentYear();
@@ -534,3 +535,383 @@ function handleFormSubmit(event) {
     document.getElementById("contactForm").reset();
   }, 2500);
 }
+
+// ==========================================================================
+// 11. 3D INTERACTIVE SPINNING SKILL SPHERE (MATCHING REFERENCE DESIGN)
+// ==========================================================================
+function init3DSkillSphere() {
+  const container = document.getElementById("sphereViewport");
+  const canvas = document.getElementById("sphereCanvas");
+  const tagsContainer = document.getElementById("sphereTags");
+
+  if (!container || !canvas || !tagsContainer) return;
+
+  const ctx = canvas.getContext("2d");
+
+  // Technical Skills Data with Custom Vector Graphics & Branding Colors
+  const skillsData = [
+    {
+      name: "Python",
+      color: "#38bdf8",
+      icon: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.47 2 7 4.5 7 4.5V7h5v1H5s-3 0-3 5 2.5 5 2.5 5H6v-2.5c0-1.5 1.5-2.5 2.5-2.5h5c1.5 0 2.5-1 2.5-2.5V4.5S16.5 2 12 2zm-1.5 2a1 1 0 110 2 1 1 0 010-2z" fill="#38bdf8"/><path d="M12 22c5.53 0 5-2.5 5-2.5V17h-5v-1h7s3 0 3-5-2.5-5-2.5-5H18v2.5c0 1.5-1.5 2.5-2.5 2.5h-5c-1.5 0-2.5 1-2.5 2.5v5.5s-.5 2.5 4 2.5zm1.5-2a1 1 0 110-2 1 1 0 010 2z" fill="#fbbf24"/></svg>`
+    },
+    {
+      name: "LangChain",
+      color: "#22c55e",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>`
+    },
+    {
+      name: "OpenAI",
+      color: "#10a37f",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#10a37f" stroke-width="2"><path d="M12 3a9 9 0 019 9c0 2.4-1 4.6-2.6 6.2L12 12V3z"/><path d="M12 12l-6.4 6.2C4 16.6 3 14.4 3 12a9 9 0 019-9v9z"/><circle cx="12" cy="12" r="3" fill="#10a37f"/></svg>`
+    },
+    {
+      name: "FastAPI",
+      color: "#059669",
+      icon: `<svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#059669"/></svg>`
+    },
+    {
+      name: "PyTorch",
+      color: "#ee4c2c",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#ee4c2c" stroke-width="2"><path d="M14.5 4a6.5 6.5 0 106 6.5"/><circle cx="16" cy="7" r="1.5" fill="#ee4c2c"/></svg>`
+    },
+    {
+      name: "Computer Vision",
+      color: "#38bdf8",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>`
+    },
+    {
+      name: "NLP",
+      color: "#f59e0b",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M12 2a8 8 0 00-8 8c0 3 2 5 2 7v3h12v-3c0-2 2-4 2-7a8 8 0 00-8-8z"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/><path d="M10 13a3 3 0 004 0"/></svg>`
+    },
+    {
+      name: "MySQL",
+      color: "#00758f",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#00758f" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`
+    },
+    {
+      name: "Flutter",
+      color: "#0284c7",
+      icon: `<svg viewBox="0 0 24 24" fill="#0284c7"><polygon points="14 2 4 12 7 15 17 5"/><polygon points="14 14 9 19 12 22 20 14"/><polygon points="11 11 7 15 12 20 16 16"/></svg>`
+    },
+    {
+      name: "GitHub",
+      color: "#ffffff",
+      icon: `<svg viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>`
+    },
+    {
+      name: "Docker",
+      color: "#38bdf8",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.8"><rect x="3" y="10" width="3" height="3"/><rect x="7" y="10" width="3" height="3"/><rect x="11" y="10" width="3" height="3"/><rect x="7" y="6" width="3" height="3"/><rect x="11" y="6" width="3" height="3"/><path d="M2 13c1 0 2 1 3 1s2-1 3-1 2 1 3 1 2-1 3-1 2 1 3 1 2-1 3-1c2 0 4 2 4 4s-4 4-11 4C4 21 2 17 2 13z"/></svg>`
+    },
+    {
+      name: "Scikit-Learn",
+      color: "#f97316",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><line x1="7" y1="7" x2="10" y2="10"/><line x1="14" y1="14" x2="17" y2="17"/><line x1="17" y1="7" x2="14" y2="10"/><line x1="10" y1="14" x2="7" y2="17"/></svg>`
+    },
+    {
+      name: "Pandas",
+      color: "#a855f7",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>`
+    },
+    {
+      name: "NumPy",
+      color: "#4f46e5",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`
+    },
+    {
+      name: "Vector DB",
+      color: "#06b6d4",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="8" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8.5" y1="7" x2="15.5" y2="7.5"/><line x1="7.5" y1="8.5" x2="10.5" y2="15.5"/><line x1="16.5" y1="10.5" x2="13.5" y2="15.5"/></svg>`
+    },
+    {
+      name: "VS Code",
+      color: "#0ea5e9",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`
+    },
+    {
+      name: "C++",
+      color: "#2563eb",
+      icon: `<svg viewBox="0 0 24 24" fill="none"><polygon points="12 2 21 7 21 17 12 22 3 17 3 7" stroke="#2563eb" stroke-width="2" fill="rgba(37,99,235,0.15)"/><text x="12" y="15" font-size="8" font-family="monospace" font-weight="bold" fill="#38bdf8" text-anchor="middle">C++</text></svg>`
+    },
+    {
+      name: "REST APIs",
+      color: "#c084fc",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`
+    },
+    {
+      name: "Deep Learning",
+      color: "#ec4899",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"><circle cx="4" cy="12" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="20" cy="12" r="2"/><line x1="6" y1="12" x2="10" y2="6"/><line x1="6" y1="12" x2="10" y2="18"/><line x1="14" y1="6" x2="18" y2="12"/><line x1="14" y1="18" x2="18" y2="12"/><line x1="12" y1="7" x2="12" y2="17"/></svg>`
+    },
+    {
+      name: "Next.js",
+      color: "#ffffff",
+      icon: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#000000" stroke="#ffffff" stroke-width="1.5"/><path d="M8 8v8l8-9.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/><path d="M15 11v5" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></svg>`
+    }
+  ];
+
+  // Distribute nodes over 3D sphere using Fibonacci Spiral
+  const count = skillsData.length;
+  const phi = Math.PI * (3 - Math.sqrt(5)); // Golden angle ~2.39996323
+
+  const nodes = [];
+  tagsContainer.innerHTML = "";
+
+  skillsData.forEach((skill, index) => {
+    // Spherical coordinates
+    const y = 1 - (index / (count - 1)) * 2; // from 1 to -1
+    const radiusAtY = Math.sqrt(Math.max(0, 1 - y * y));
+    const theta = phi * index;
+    const x = Math.cos(theta) * radiusAtY;
+    const z = Math.sin(theta) * radiusAtY;
+
+    // Create DOM element for skill
+    const tagEl = document.createElement("div");
+    tagEl.className = "sphere-skill-tag";
+    tagEl.innerHTML = `
+      <div class="tag-icon-wrap" style="box-shadow: 0 0 14px ${skill.color}22;">
+        ${skill.icon}
+      </div>
+      <span class="tag-name">${skill.name}</span>
+    `;
+
+    // Pause rotation when user hovers a tag
+    tagEl.addEventListener("mouseenter", () => {
+      isHoveringTag = true;
+    });
+    tagEl.addEventListener("mouseleave", () => {
+      isHoveringTag = false;
+    });
+
+    tagsContainer.appendChild(tagEl);
+
+    nodes.push({
+      x, y, z,
+      skill,
+      element: tagEl
+    });
+  });
+
+  // State variables for 3D physics and rotation
+  let rotX = 0.2;
+  let rotY = 0.3;
+  let velX = 0.0018;
+  let velY = 0.0035;
+
+  let isDragging = false;
+  let isHoveringTag = false;
+  let lastMouseX = 0;
+  let lastMouseY = 0;
+
+  // Viewport dimensions and sphere radius
+  let width = (canvas.width = container.clientWidth);
+  let height = (canvas.height = container.clientHeight);
+  let sphereRadius = Math.min(width, height) * 0.38;
+
+  function resizeCanvas() {
+    if (!container) return;
+    width = canvas.width = container.clientWidth;
+    height = canvas.height = container.clientHeight;
+    sphereRadius = Math.min(width, height) * 0.38;
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+
+  // Mouse / Pointer Drag Interaction
+  container.addEventListener("pointerdown", (e) => {
+    isDragging = true;
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+    container.setPointerCapture(e.pointerId);
+  });
+
+  window.addEventListener("pointermove", (e) => {
+    if (isDragging) {
+      const dx = e.clientX - lastMouseX;
+      const dy = e.clientY - lastMouseY;
+
+      velY = dx * 0.004;
+      velX = -dy * 0.004;
+
+      rotY += velY;
+      rotX += velX;
+
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    }
+  });
+
+  window.addEventListener("pointerup", () => {
+    isDragging = false;
+  });
+
+  window.addEventListener("pointercancel", () => {
+    isDragging = false;
+  });
+
+  // 3D Matrix Rotation Helper
+  function rotate3D(x, y, z, angleX, angleY) {
+    // Rotate around Y axis
+    const cosY = Math.cos(angleY);
+    const sinY = Math.sin(angleY);
+    const x1 = x * cosY - z * sinY;
+    const z1 = z * cosY + x * sinY;
+
+    // Rotate around X axis
+    const cosX = Math.cos(angleX);
+    const sinX = Math.sin(angleX);
+    const y2 = y * cosX - z1 * sinX;
+    const z2 = z1 * cosX + y * sinX;
+
+    return { x: x1, y: y2, z: z2 };
+  }
+
+  // Draw 3D Wireframe Mesh (Latitude, Longitude and Points)
+  function drawWireframeSphere(centerX, centerY, radius, currentRotX, currentRotY) {
+    ctx.clearRect(0, 0, width, height);
+
+    const latCount = 7;
+    const lonCount = 10;
+    const pointsPerCircle = 36;
+
+    // Draw Latitudes
+    for (let i = 1; i < latCount; i++) {
+      const latAngle = ((i / latCount) - 0.5) * Math.PI;
+      const ringRadius = Math.cos(latAngle) * radius;
+      const ringY = Math.sin(latAngle) * radius;
+
+      ctx.beginPath();
+      let firstPoint = true;
+
+      for (let j = 0; j <= pointsPerCircle; j++) {
+        const theta = (j / pointsPerCircle) * Math.PI * 2;
+        const px = Math.cos(theta) * ringRadius;
+        const py = ringY;
+        const pz = Math.sin(theta) * ringRadius;
+
+        const rotated = rotate3D(px, py, pz, currentRotX, currentRotY);
+        const k = 450 / (450 + rotated.z);
+        const sx = centerX + rotated.x * k;
+        const sy = centerY + rotated.y * k;
+
+        if (firstPoint) {
+          ctx.moveTo(sx, sy);
+          firstPoint = false;
+        } else {
+          ctx.lineTo(sx, sy);
+        }
+      }
+
+      ctx.strokeStyle = "rgba(99, 102, 241, 0.12)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Draw Longitudes
+    for (let i = 0; i < lonCount; i++) {
+      const lonAngle = (i / lonCount) * Math.PI;
+
+      ctx.beginPath();
+      let firstPoint = true;
+
+      for (let j = 0; j <= pointsPerCircle; j++) {
+        const theta = (j / pointsPerCircle) * Math.PI * 2;
+        const px = Math.cos(theta) * Math.sin(lonAngle) * radius;
+        const py = Math.sin(theta) * radius;
+        const pz = Math.cos(theta) * Math.cos(lonAngle) * radius;
+
+        const rotated = rotate3D(px, py, pz, currentRotX, currentRotY);
+        const k = 450 / (450 + rotated.z);
+        const sx = centerX + rotated.x * k;
+        const sy = centerY + rotated.y * k;
+
+        if (firstPoint) {
+          ctx.moveTo(sx, sy);
+          firstPoint = false;
+        } else {
+          ctx.lineTo(sx, sy);
+        }
+      }
+
+      ctx.strokeStyle = "rgba(56, 189, 248, 0.10)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Draw faint glowing grid nodes
+    for (let i = 0; i < 40; i++) {
+      const angleA = (i * 1.61803) * Math.PI * 2;
+      const angleB = Math.asin((i / 20) - 1);
+      const px = Math.cos(angleB) * Math.cos(angleA) * radius;
+      const py = Math.sin(angleB) * radius;
+      const pz = Math.cos(angleB) * Math.sin(angleA) * radius;
+
+      const rotated = rotate3D(px, py, pz, currentRotX, currentRotY);
+      const k = 450 / (450 + rotated.z);
+      const sx = centerX + rotated.x * k;
+      const sy = centerY + rotated.y * k;
+
+      const alpha = Math.max(0.05, 0.25 * ((rotated.z + radius) / (2 * radius)));
+      ctx.beginPath();
+      ctx.arc(sx, sy, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(165, 180, 252, ${alpha})`;
+      ctx.fill();
+    }
+  }
+
+  // Animation Loop
+  function animateSphere() {
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    // Apply inertia or auto-rotation
+    if (!isDragging) {
+      if (isHoveringTag) {
+        // Slow down while user inspects a tag
+        velX *= 0.9;
+        velY *= 0.9;
+      } else {
+        // Smoothly return to default auto-rotation speed
+        velX = velX * 0.94 + 0.0012 * 0.06;
+        velY = velY * 0.94 + 0.0030 * 0.06;
+      }
+      rotX += velX;
+      rotY += velY;
+    }
+
+    // Draw 3D wireframe mesh on canvas
+    drawWireframeSphere(centerX, centerY, sphereRadius, rotX, rotY);
+
+    // Update 3D projected coordinates for each skill node
+    const focalLength = 450;
+    nodes.forEach((node) => {
+      const px = node.x * sphereRadius;
+      const py = node.y * sphereRadius;
+      const pz = node.z * sphereRadius;
+
+      const rotated = rotate3D(px, py, pz, rotX, rotY);
+
+      // Perspective projection
+      const k = focalLength / (focalLength + rotated.z);
+      const screenX = centerX + rotated.x * k;
+      const screenY = centerY + rotated.y * k;
+
+      // Depth mapping: front nodes are larger & fully opaque, back nodes are smaller & translucent
+      const depthFactor = (rotated.z + sphereRadius) / (2 * sphereRadius);
+      const scale = k * (0.75 + 0.45 * depthFactor);
+      const opacity = Math.max(0.22, Math.min(1.0, 0.25 + 0.75 * depthFactor));
+      const zIndex = Math.round(rotated.z + 500);
+
+      node.element.style.transform = `translate3d(${screenX}px, ${screenY}px, 0) translate(-50%, -50%) scale(${scale.toFixed(3)})`;
+      node.element.style.opacity = opacity.toFixed(3);
+      node.element.style.zIndex = zIndex;
+    });
+
+    requestAnimationFrame(animateSphere);
+  }
+
+  animateSphere();
+}
+

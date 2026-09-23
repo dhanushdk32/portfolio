@@ -959,6 +959,221 @@ img {
 }
 
 /* ==========================================================================
+   3D INTERACTIVE SKILLS SPHERE (MATCHING REFERENCE DESIGN)
+   ========================================================================== */
+.skills-sphere-section {
+  padding: 80px 0 60px 0;
+  position: relative;
+}
+
+.skills-sphere-header {
+  text-align: center;
+  margin-bottom: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sphere-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-pure);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.sphere-main-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.skills-sphere-stage {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  background: rgba(14, 18, 27, 0.75);
+  border: 1px solid var(--border-glass-hover);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 35px rgba(56, 189, 248, 0.08);
+}
+
+.sphere-dot-matrix {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.sphere-glow-aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, rgba(192, 132, 252, 0.09) 45%, transparent 70%);
+  filter: blur(55px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sphere-interactive-viewport {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  z-index: 1;
+}
+
+.sphere-interactive-viewport:active {
+  cursor: grabbing;
+}
+
+.sphere-wireframe-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sphere-tags-cloud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sphere-skill-tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  background: rgba(18, 22, 32, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.sphere-skill-tag .tag-icon-wrap {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.sphere-skill-tag .tag-icon-wrap svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.2s ease;
+}
+
+.sphere-skill-tag .tag-name {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-pure);
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.sphere-skill-tag:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(15, 23, 42, 0.98);
+  box-shadow: 0 0 28px rgba(56, 189, 248, 0.55), 0 12px 30px rgba(0, 0, 0, 0.8);
+  z-index: 1000 !important;
+}
+
+.sphere-skill-tag:hover .tag-icon-wrap {
+  transform: scale(1.15);
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--accent-cyan);
+}
+
+.sphere-hud-overlay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+  background: rgba(10, 12, 17, 0.7);
+  border-top: 1px solid var(--border-glass);
+  backdrop-filter: blur(12px);
+  flex-wrap: wrap;
+  gap: 12px;
+  position: relative;
+  z-index: 3;
+}
+
+.sphere-hud-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.hud-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+  animation: pulseDot 2s infinite;
+}
+
+.sphere-hud-instruct {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+}
+
+/* ==========================================================================
    CAPABILITIES & TECH LAYOUT (SPLIT 2-COLUMN)
    ========================================================================== */
 .capabilities-layout {
