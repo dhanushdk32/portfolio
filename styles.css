@@ -985,14 +985,6 @@ img {
   text-transform: uppercase;
 }
 
-.sphere-main-subtitle {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  max-width: 580px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
 .skills-sphere-stage {
   position: relative;
   max-width: 960px;
@@ -1128,49 +1120,6 @@ img {
   transform: scale(1.15);
   background: rgba(56, 189, 248, 0.15);
   border-color: var(--accent-cyan);
-}
-
-.sphere-hud-overlay {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 28px;
-  background: rgba(10, 12, 17, 0.7);
-  border-top: 1px solid var(--border-glass);
-  backdrop-filter: blur(12px);
-  flex-wrap: wrap;
-  gap: 12px;
-  position: relative;
-  z-index: 3;
-}
-
-.sphere-hud-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--accent-cyan);
-  letter-spacing: 0.1em;
-  font-weight: 700;
-}
-
-.hud-pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent-cyan);
-  box-shadow: 0 0 8px var(--accent-cyan);
-  animation: pulseDot 2s infinite;
-}
-
-.sphere-hud-instruct {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  font-family: var(--font-body);
 }
 
 /* ==========================================================================
