@@ -1499,17 +1499,20 @@ img {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 14px;
+  padding: 18px 16px;
   position: relative;
   border-radius: var(--radius-md);
-  transition: var(--transition-smooth);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .process-step:hover,
 .process-step.step-active {
-  background: rgba(255, 255, 255, 0.04);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5), 0 0 22px rgba(56, 189, 248, 0.16);
 }
 
 .step-num {
@@ -1518,6 +1521,13 @@ img {
   color: var(--accent-cyan);
   font-weight: 700;
   letter-spacing: 0.1em;
+  transition: var(--transition-smooth);
+}
+
+.process-step:hover .step-num,
+.process-step.step-active .step-num {
+  color: #38bdf8;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
 }
 
 .step-title {
@@ -1526,12 +1536,24 @@ img {
   font-weight: 800;
   color: var(--text-pure);
   letter-spacing: 0.04em;
+  transition: var(--transition-smooth);
+}
+
+.process-step:hover .step-title,
+.process-step.step-active .step-title {
+  color: #ffffff;
 }
 
 .step-desc {
   font-size: 0.78rem;
   color: var(--text-muted);
   line-height: 1.5;
+  transition: var(--transition-smooth);
+}
+
+.process-step:hover .step-desc,
+.process-step.step-active .step-desc {
+  color: #e2e8f0;
 }
 
 .step-icon {
@@ -1543,7 +1565,8 @@ img {
 .process-step:hover .step-icon,
 .process-step.step-active .step-icon {
   color: var(--accent-cyan);
-  transform: scale(1.15);
+  transform: translateY(-3px) scale(1.22);
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
 }
 
 /* ==========================================================================

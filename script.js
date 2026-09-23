@@ -120,10 +120,10 @@ function initRoleTyping() {
   if (!roleEl) return;
 
   const roles = [
-    "DEVELOPER",
+    "SOFTWARE DEVELOPER",
     "DATA ANALYST",
-    "SOFTWARE DEV",
-    "ML ANALYST"
+    "SOFTWARE ENGINEER",
+    "ML PRACTITIONER"
   ];
 
   let roleIndex = 0;
@@ -328,13 +328,32 @@ function init3DTilt() {
   });
 }
 
-// 7. Active Process Flow Pipeline Cycle
+// 7. Active Process Flow Pipeline Cycle with Interactive Hover Support
 function initProcessCycle() {
   const steps = document.querySelectorAll(".process-step");
   if (!steps.length) return;
 
   let currentStep = 0;
+  let isUserHovering = false;
+
+  // Enhance each step with instant hover response
+  steps.forEach((step, index) => {
+    step.addEventListener("mouseenter", () => {
+      isUserHovering = true;
+      steps.forEach(s => s.classList.remove("step-active"));
+      step.classList.add("step-active");
+      currentStep = index;
+    });
+
+    step.addEventListener("mouseleave", () => {
+      isUserHovering = false;
+    });
+  });
+
+  // Automated gentle pipeline scan that pauses on hover
   setInterval(() => {
+    if (isUserHovering) return;
+
     steps.forEach((step, index) => {
       if (index === currentStep) {
         step.classList.add("step-active");
@@ -343,7 +362,7 @@ function initProcessCycle() {
       }
     });
     currentStep = (currentStep + 1) % steps.length;
-  }, 2600);
+  }, 2800);
 }
 
 // 8. Mobile Navigation Toggle
