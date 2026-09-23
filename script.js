@@ -120,9 +120,7 @@ function initRoleTyping() {
   if (!roleEl) return;
 
   const roles = [
-    "Software Developer",
     "Data Analyst",
-    "Software Engineer",
     "ML Developer"
   ];
 
@@ -997,11 +995,11 @@ const aiKnowledgeBase = [
   },
   {
     keywords: ["who are you", "who is dhanush", "about", "bio", "tell me about yourself", "summary"],
-    answer: "👋 Dhanush Kumar is a **Software Developer & Data Analyst** with a solid foundation in Computer Science and AI/ML. He has hands-on internship experience in building practical software applications, role-based access systems, database workflows, and Power BI analytics dashboards."
+    answer: "👋 Dhanush Kumar is a **Data Analyst & ML Developer** with a strong foundation in Computer Science and AI/ML. He has hands-on internship experience in exploratory data analysis, machine learning workflows, SQL querying, and Power BI dashboards."
   },
   {
     keywords: ["available", "opportunity", "hire", "job", "freelance", "full time", "open to work"],
-    answer: "🟢 Yes! Dhanush is actively available for Software Developer, Data Analyst, and Machine Learning engineering opportunities."
+    answer: "🟢 Yes! Dhanush is actively available for Data Analyst and Machine Learning Developer opportunities."
   },
   {
     keywords: ["hi", "hello", "hey", "greetings", "good morning", "good evening"],
