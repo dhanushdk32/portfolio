@@ -123,7 +123,7 @@ function initRoleTyping() {
     "SOFTWARE DEVELOPER",
     "DATA ANALYST",
     "SOFTWARE ENGINEER",
-    "ML PRACTITIONER"
+    "ML DEVELOPER"
   ];
 
   let roleIndex = 0;
