@@ -116,8 +116,6 @@ function initRoleTyping() {
 
   const roles = [
     "ENGINEER",
-    "ARCHITECT",
-    "SCIENTIST",
     "DEVELOPER",
     "SPECIALIST"
   ];
