@@ -946,3 +946,173 @@ function init3DSkillSphere() {
   animateSphere();
 }
 
+/* ==========================================================================
+   AI PORTFOLIO ASSISTANT (FRONTEND INTEL ENGINE)
+   ========================================================================== */
+
+const aiKnowledgeBase = [
+  {
+    keywords: ["project", "projects", "work", "portfolio", "built", "created", "smart car", "parking", "client management", "power bi", "dashboard"],
+    answer: "🚀 **Dhanush's Key Featured Projects:**<br><br>" +
+            "1. **Smart Car Parking System:** ML-powered parking slot availability & automated booking solution using historical parking data patterns (Python, ML, Data Analytics, SQL).<br><br>" +
+            "2. **Client Management System:** Centralized business client application with Role-Based Access Control (Admin, Staff, Client login modules) and communication tracking (Java/Python, SQL, Web).<br><br>" +
+            "3. **Data Analytics & Power BI Dashboard:** Business Intelligence solution with interactive KPI cards, customer segmentation, and automated revenue trend analytics (Power BI, SQL, Data Visualization)."
+  },
+  {
+    keywords: ["skill", "skills", "tech", "stack", "technology", "technologies", "languages", "tools", "python", "java", "sql", "power bi"],
+    answer: "⚡ **Dhanush's Technical Proficiencies:**<br><br>" +
+            "• **Programming:** Python, Java, SQL, C++<br>" +
+            "• **Web Technologies:** HTML5, CSS3, JavaScript, REST APIs<br>" +
+            "• **Data & Analytics:** Power BI, Data Analysis, Data Visualization, MySQL<br>" +
+            "• **Core Competencies:** Software Development, Machine Learning, RBAC Security, Database Fundamentals, Problem Solving."
+  },
+  {
+    keywords: ["internship", "internships", "experience", "work experience", "company", "intern"],
+    answer: "💼 **Dhanush's Internship Experience:**<br><br>" +
+            "1. **Software Developer Intern** *(June 2026 – September 2026)*<br>" +
+            "Contributed to software development lifecycle, application logic, debugging, testing, and building maintainable web workflows.<br><br>" +
+            "2. **Machine Learning Intern** *(January 2026 – March 2026)*<br>" +
+            "Worked on ML lifecycle concepts, data preparation, structured dataset exploration, and model-oriented problem solving."
+  },
+  {
+    keywords: ["education", "degree", "college", "university", "study", "studies", "msc", "bsc", "school", "graduate"],
+    answer: "🎓 **Dhanush's Educational Background:**<br><br>" +
+            "• **M.Sc. Networking and Information Technology** *(2024 – 2026)*<br>" +
+            "St. John’s College, Palayamkottai<br><br>" +
+            "• **B.Sc. Artificial Intelligence and Machine Learning** *(2021 – 2024)*<br>" +
+            "Vels University, Chennai"
+  },
+  {
+    keywords: ["contact", "email", "phone", "reach", "hire", "call", "message", "touch", "get in touch", "number"],
+    answer: "📬 **How to Contact Dhanush:**<br><br>" +
+            "• **Email:** <a href='mailto:dhanush420490@gmail.com'>dhanush420490@gmail.com</a><br>" +
+            "• **Phone:** <a href='tel:+917812886528'>+91 78128 86528</a><br>" +
+            "• **Location:** Tamil Nadu, India<br>" +
+            "• **GitHub:** <a href='https://github.com/dhanushdk32' target='_blank'>github.com/dhanushdk32</a><br><br>" +
+            "You can also use the contact form at the bottom of the page!"
+  },
+  {
+    keywords: ["resume", "cv", "download resume", "pdf"],
+    answer: "📄 You can download Dhanush's official resume right here: <a href='assets/Dhanush_Kumar_Resume.pdf' download='Dhanush_Kumar_Resume.pdf'>📥 Click here to Download Resume (PDF)</a>."
+  },
+  {
+    keywords: ["who are you", "who is dhanush", "about", "bio", "tell me about yourself", "summary"],
+    answer: "👋 Dhanush Kumar is a **Software Developer & Data Analyst** with a solid foundation in Computer Science and AI/ML. He has hands-on internship experience in building practical software applications, role-based access systems, database workflows, and Power BI analytics dashboards."
+  },
+  {
+    keywords: ["available", "opportunity", "hire", "job", "freelance", "full time", "open to work"],
+    answer: "🟢 Yes! Dhanush is actively available for Software Developer, Data Analyst, and Machine Learning engineering opportunities."
+  },
+  {
+    keywords: ["hi", "hello", "hey", "greetings", "good morning", "good evening"],
+    answer: "Hello there! 👋 I'm Dhanush's AI Assistant. How can I help you today? You can ask about his projects, skills, education, internships, or contact details!"
+  }
+];
+
+// Handle AI Chat Form Submission
+function handleAiChatSubmit(e) {
+  if (e) e.preventDefault();
+  const input = document.getElementById("aiChatInput");
+  if (!input) return;
+
+  const query = input.value.trim();
+  if (!query) return;
+
+  // Add User Message
+  appendAiMessage("user", query);
+  input.value = "";
+
+  // Show Typing Indicator
+  showAiTypingIndicator();
+
+  // Compute Response with natural reading delay
+  setTimeout(() => {
+    removeAiTypingIndicator();
+    const botResponse = generateAiResponse(query);
+    appendAiMessage("bot", botResponse);
+  }, 500);
+}
+
+// Quick Prompt Chips Trigger
+function askAiPrompt(promptText) {
+  const input = document.getElementById("aiChatInput");
+  if (input) {
+    input.value = promptText;
+  }
+  handleAiChatSubmit();
+}
+
+// Append Message Bubble to Chat Terminal
+function appendAiMessage(sender, text) {
+  const container = document.getElementById("aiMessages");
+  if (!container) return;
+
+  const msgDiv = document.createElement("div");
+  msgDiv.className = `ai-message ${sender === "user" ? "ai-user-message" : "ai-bot-message"}`;
+  msgDiv.innerHTML = `<div class="message-bubble">${text}</div>`;
+
+  container.appendChild(msgDiv);
+  container.scrollTop = container.scrollHeight;
+}
+
+// Show Typing Indicator
+function showAiTypingIndicator() {
+  const container = document.getElementById("aiMessages");
+  if (!container) return;
+
+  const typingDiv = document.createElement("div");
+  typingDiv.className = "ai-message ai-bot-message";
+  typingDiv.id = "aiTypingIndicator";
+  typingDiv.innerHTML = `
+    <div class="ai-typing-bubble">
+      <span></span><span></span><span></span>
+    </div>
+  `;
+
+  container.appendChild(typingDiv);
+  container.scrollTop = container.scrollHeight;
+}
+
+// Remove Typing Indicator
+function removeAiTypingIndicator() {
+  const indicator = document.getElementById("aiTypingIndicator");
+  if (indicator) {
+    indicator.remove();
+  }
+}
+
+// Client-Side Pattern Matching Engine
+function generateAiResponse(query) {
+  const normalized = query.toLowerCase().replace(/[^a-z0-9\s]/g, "");
+  const words = normalized.split(/\s+/);
+
+  let bestMatch = null;
+  let maxScore = 0;
+
+  for (const item of aiKnowledgeBase) {
+    let score = 0;
+    for (const kw of item.keywords) {
+      if (normalized.includes(kw)) {
+        score += kw.includes(" ") ? 3 : 2; // Higher weight for exact phrase match
+      } else {
+        for (const w of words) {
+          if (w.length > 2 && kw.includes(w)) {
+            score += 1;
+          }
+        }
+      }
+    }
+
+    if (score > maxScore) {
+      maxScore = score;
+      bestMatch = item;
+    }
+  }
+
+  if (bestMatch && maxScore > 0) {
+    return bestMatch.answer;
+  }
+
+  return "I'm Dhanush's portfolio assistant! I can tell you about his **Projects** (Smart Parking, Client Management, BI Dashboard), **Technical Skills** (Python, Java, SQL, Power BI), **Internships**, **Education**, or **Contact details**. Feel free to try one of the quick buttons below!";
+}
+
