@@ -98,11 +98,17 @@ function initScrollReveal() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-revealed");
+          // Clear any transition delays after initial entrance animation so hover effects respond instantly
+          setTimeout(() => {
+            if (entry.target.style) {
+              entry.target.style.transitionDelay = "0s";
+            }
+          }, 850);
           observer.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
   );
 
   revealElements.forEach(el => revealObserver.observe(el));
@@ -278,12 +284,29 @@ function initNeuralCanvas() {
   drawNeuralNetwork();
 }
 
-// 6. 3D Interactive Tilt on Cards
+// 6. 3D Interactive Tilt & Hover on Cards
 function init3DTilt() {
-  if (window.innerWidth < 1024) return; // Disable on mobile/touch devices for smooth performance
-
   const tiltCards = document.querySelectorAll("[data-tilt]");
+  if (!tiltCards.length) return;
+
   tiltCards.forEach(card => {
+    // Make project cards clickable to open modal easily
+    const projectId = card.getAttribute("data-project");
+    if (projectId) {
+      card.addEventListener("click", (e) => {
+        // Prevent opening if clicking an interactive sub-element like a button or link
+        if (!e.target.closest("button") && !e.target.closest("a")) {
+          openProjectModal(projectId);
+        }
+      });
+    }
+
+    if (window.innerWidth < 1024) return; // Only apply mouse tilt on desktop/laptop
+
+    card.addEventListener("mouseenter", () => {
+      card.style.transition = "box-shadow 0.3s ease, border-color 0.3s ease";
+    });
+
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -292,14 +315,15 @@ function init3DTilt() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
+      const rotateX = ((y - centerY) / centerY) * -7;
+      const rotateY = ((x - centerX) / centerX) * 7;
 
-      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-8px) scale(1.015)`;
     });
 
     card.addEventListener("mouseleave", () => {
-      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
+      card.style.transition = "transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease";
+      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)";
     });
   });
 }
