@@ -7,46 +7,45 @@
 // Project database for interactive modal walkthroughs
 const projectData = {
   parking: {
-    title: "Smart Car Parking Management with Predictive Analysis",
-    category: "Machine Learning • IoT • Computer Vision • Full Stack",
+    title: "Smart Car Parking System with Predictive Analysis",
+    category: "Machine Learning • Data Analytics • SQL • Web",
     image: "assets/project_parking.png",
-    overview: "An automated smart parking platform developed to tackle urban parking bottlenecks. The system combines machine learning for slot vacancy forecasting with computer vision and image processing for automated detection.",
+    overview: "A smart parking solution designed to help users find and book available parking slots while reducing unnecessary waiting time. Implements machine learning models on historical parking trends to predict slot availability and streamline the reservation process.",
     highlights: [
-      "Trained predictive ML algorithms on historical time-of-day, day-of-week, and geographic traffic data to forecast parking availability with high precision.",
-      "Integrated image processing module to detect parking lot occupancy from camera video streams.",
-      "Built a robust asynchronous REST API backend using FastAPI to deliver sub-millisecond response rates.",
-      "Engineered cross-platform mobile application in Flutter for seamless user navigation, slot booking, and payment processing.",
-      "Relational database design in MySQL for telemetry records, transaction handling, and user authentication."
+      "Developed a smart parking solution designed to help users find and book available parking slots while reducing unnecessary waiting time.",
+      "Implemented a workflow for selecting parking areas, viewing slot availability, choosing parking duration, and completing the booking process.",
+      "Applied machine learning concepts to analyze historical parking data and predict parking-slot availability based on relevant patterns and features.",
+      "Integrated database management in SQL for user authentication, booking telemetry, and historical slot records."
     ],
-    techStack: ["Python", "FastAPI", "Flutter", "Machine Learning", "Image Processing", "MySQL", "REST APIs"],
+    techStack: ["Python", "Machine Learning", "Data Analysis", "SQL", "Predictive Modeling", "Web Technologies"],
     githubUrl: "https://github.com/dhanushdk32"
   },
-  chatpdf: {
-    title: "ChatPDF: Conversational Text Summaries using LLM in Python",
-    category: "Generative AI • LLM • RAG • LangChain",
-    image: "assets/project_chatpdf.png",
-    overview: "An end-to-end intelligent document question-answering assistant that enables users to upload complex PDF documents and query them interactively with zero hallucinations using semantic search and retrieval-augmented generation (RAG).",
+  client_mgmt: {
+    title: "Client Management System with Role-Based Access",
+    category: "Software Development • RBAC Security • Web & Database",
+    image: "assets/project_client_mgmt.png",
+    overview: "A comprehensive client management application developed to organize client information, interactions, activities, and business-related records in a centralized, secure system.",
     highlights: [
-      "Engineered multi-page PDF text extraction and semantic chunking pipelines for optimal retrieval context windows.",
-      "Integrated OpenAI GPT models with LangChain orchestration for nuanced, context-grounded conversational summaries and natural language answers.",
-      "Implemented vector embedding workflows and local SQLite caching for rapid query execution and low latency.",
-      "Designed prompt engineering strategies with cite-and-quote verification to ground LLM outputs directly on document snippets."
+      "Developed a client management application to organize client information, interactions, activities, and business-related records in a centralized system.",
+      "Implemented role-based authentication with separate Admin, Staff, and Client login modules, providing role-specific access and workflows based on user permissions.",
+      "Designed structured workflows for managing client profiles, tracking communication, and maintaining important client details.",
+      "Applied software development and database concepts to build a maintainable application suitable for day-to-day business operations."
     ],
-    techStack: ["Python", "OpenAI GPT-LLM", "LangChain", "SQLite", "Vector Embeddings", "RAG Pipeline", "Prompt Engineering"],
+    techStack: ["Python / Java", "SQL Database", "HTML5", "CSS3", "JavaScript", "RBAC Authentication", "Software Development"],
     githubUrl: "https://github.com/dhanushdk32"
   },
-  resume: {
-    title: "AI-Based Resume Screening & Candidate Ranking System",
-    category: "Natural Language Processing • Talent Intelligence • REST API",
-    image: "assets/project_resume.png",
-    overview: "An automated recruitment screening engine that parses multi-format resumes, extracts technical proficiencies and job histories, and computes matching scores against role requirements using advanced NLP algorithms.",
+  analytics: {
+    title: "Data Analytics & Business Intelligence Dashboard",
+    category: "Data Analytics • Power BI • Data Visualization • SQL",
+    image: "assets/project_powerbi_analytics.png",
+    overview: "An interactive data analytics and business intelligence solution combining Power BI and SQL for exploratory data analysis, customer segmentation, performance KPIs, and automated reporting.",
     highlights: [
-      "Developed NLP-based tokenization, named entity recognition (NER), and keyword extraction algorithms to parse candidate resumes accurately from PDF/DOC formats.",
-      "Calculated weighted similarity scores comparing job description vectors against applicant profiles to generate an objective candidate ranking matrix.",
-      "Integrated secure REST API endpoints for candidate uploading, criteria filtering, and recruiter dashboards.",
-      "Utilized MySQL for persistent applicant database management and structured candidate data storage."
+      "Explored structured datasets to identify patterns, clean data, and prepare business metrics for analytical discovery.",
+      "Engineered interactive Power BI dashboards featuring revenue trends, customer segmentation radar charts, and sales forecasts.",
+      "Formulated structured SQL queries for multi-dimensional data aggregation, filtering, and reporting accuracy.",
+      "Translated complex data points into actionable visual insights supporting strategic decision-making."
     ],
-    techStack: ["Python", "MySQL", "Natural Language Processing (NLP)", "REST API", "PDF Parsing", "Candidate Scoring Algorithm"],
+    techStack: ["Power BI", "Data Analysis", "Data Visualization", "SQL", "Python", "Business Intelligence"],
     githubUrl: "https://github.com/dhanushdk32"
   }
 };
@@ -115,9 +114,10 @@ function initRoleTyping() {
   if (!roleEl) return;
 
   const roles = [
-    "ENGINEER",
     "DEVELOPER",
-    "SPECIALIST"
+    "DATA ANALYST",
+    "SOFTWARE DEV",
+    "ML ANALYST"
   ];
 
   let roleIndex = 0;
@@ -546,7 +546,7 @@ function init3DSkillSphere() {
 
   const ctx = canvas.getContext("2d");
 
-  // Technical Skills Data with Custom Vector Graphics & Branding Colors
+  // Technical Skills Data with Custom Vector Graphics & Branding Colors from Resume
   const skillsData = [
     {
       name: "Python",
@@ -554,34 +554,49 @@ function init3DSkillSphere() {
       icon: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.47 2 7 4.5 7 4.5V7h5v1H5s-3 0-3 5 2.5 5 2.5 5H6v-2.5c0-1.5 1.5-2.5 2.5-2.5h5c1.5 0 2.5-1 2.5-2.5V4.5S16.5 2 12 2zm-1.5 2a1 1 0 110 2 1 1 0 010-2z" fill="#38bdf8"/><path d="M12 22c5.53 0 5-2.5 5-2.5V17h-5v-1h7s3 0 3-5-2.5-5-2.5-5H18v2.5c0 1.5-1.5 2.5-2.5 2.5h-5c-1.5 0-2.5 1-2.5 2.5v5.5s-.5 2.5 4 2.5zm1.5-2a1 1 0 110-2 1 1 0 010 2z" fill="#fbbf24"/></svg>`
     },
     {
-      name: "LangChain",
-      color: "#22c55e",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>`
+      name: "Java",
+      color: "#ea580c",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`
     },
     {
-      name: "OpenAI",
-      color: "#10a37f",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#10a37f" stroke-width="2"><path d="M12 3a9 9 0 019 9c0 2.4-1 4.6-2.6 6.2L12 12V3z"/><path d="M12 12l-6.4 6.2C4 16.6 3 14.4 3 12a9 9 0 019-9v9z"/><circle cx="12" cy="12" r="3" fill="#10a37f"/></svg>`
+      name: "SQL",
+      color: "#0284c7",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`
     },
     {
-      name: "FastAPI",
-      color: "#059669",
-      icon: `<svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#059669"/></svg>`
-    },
-    {
-      name: "PyTorch",
-      color: "#ee4c2c",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#ee4c2c" stroke-width="2"><path d="M14.5 4a6.5 6.5 0 106 6.5"/><circle cx="16" cy="7" r="1.5" fill="#ee4c2c"/></svg>`
-    },
-    {
-      name: "Computer Vision",
-      color: "#38bdf8",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>`
-    },
-    {
-      name: "NLP",
+      name: "Power BI",
       color: "#f59e0b",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M12 2a8 8 0 00-8 8c0 3 2 5 2 7v3h12v-3c0-2 2-4 2-7a8 8 0 00-8-8z"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/><path d="M10 13a3 3 0 004 0"/></svg>`
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><rect x="3" y="12" width="4" height="9" rx="1" fill="rgba(245,158,11,0.2)"/><rect x="10" y="7" width="4" height="14" rx="1" fill="rgba(245,158,11,0.4)"/><rect x="17" y="3" width="4" height="18" rx="1" fill="rgba(245,158,11,0.6)"/></svg>`
+    },
+    {
+      name: "HTML5",
+      color: "#f97316",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><polyline points="4 3 20 3 18 19 12 21 6 19 4 3"/><polyline points="8 7 16 7 15.5 11 8.5 11"/><polyline points="8.5 15 15 15 14.5 17 12 18 9.5 17"/></svg>`
+    },
+    {
+      name: "CSS3",
+      color: "#38bdf8",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polyline points="4 3 20 3 18 19 12 21 6 19 4 3"/><path d="M8 8h8l-1 5h-6l.5 4 2.5.7 2.5-.7.3-2"/></svg>`
+    },
+    {
+      name: "JavaScript",
+      color: "#fbbf24",
+      icon: `<svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4" fill="#fbbf24"/><text x="14" y="17" font-size="10" font-family="monospace" font-weight="900" fill="#0a0c11" text-anchor="middle">JS</text></svg>`
+    },
+    {
+      name: "Data Analysis",
+      color: "#a855f7",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><polyline points="6 14 12 4 18 10"/></svg>`
+    },
+    {
+      name: "Data Viz",
+      color: "#ec4899",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>`
+    },
+    {
+      name: "Machine Learning",
+      color: "#10a37f",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#10a37f" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><line x1="7" y1="7" x2="10" y2="10"/><line x1="14" y1="14" x2="17" y2="17"/><line x1="17" y1="7" x2="14" y2="10"/><line x1="10" y1="14" x2="7" y2="17"/></svg>`
     },
     {
       name: "MySQL",
@@ -589,9 +604,19 @@ function init3DSkillSphere() {
       icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#00758f" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`
     },
     {
-      name: "Flutter",
-      color: "#0284c7",
-      icon: `<svg viewBox="0 0 24 24" fill="#0284c7"><polygon points="14 2 4 12 7 15 17 5"/><polygon points="14 14 9 19 12 22 20 14"/><polygon points="11 11 7 15 12 20 16 16"/></svg>`
+      name: "Database",
+      color: "#06b6d4",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>`
+    },
+    {
+      name: "Problem Solving",
+      color: "#6366f1",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`
+    },
+    {
+      name: "Software Dev",
+      color: "#38bdf8",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`
     },
     {
       name: "GitHub",
@@ -599,29 +624,9 @@ function init3DSkillSphere() {
       icon: `<svg viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>`
     },
     {
-      name: "Docker",
-      color: "#38bdf8",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.8"><rect x="3" y="10" width="3" height="3"/><rect x="7" y="10" width="3" height="3"/><rect x="11" y="10" width="3" height="3"/><rect x="7" y="6" width="3" height="3"/><rect x="11" y="6" width="3" height="3"/><path d="M2 13c1 0 2 1 3 1s2-1 3-1 2 1 3 1 2-1 3-1 2 1 3 1 2-1 3-1c2 0 4 2 4 4s-4 4-11 4C4 21 2 17 2 13z"/></svg>`
-    },
-    {
-      name: "Scikit-Learn",
-      color: "#f97316",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><line x1="7" y1="7" x2="10" y2="10"/><line x1="14" y1="14" x2="17" y2="17"/><line x1="17" y1="7" x2="14" y2="10"/><line x1="10" y1="14" x2="7" y2="17"/></svg>`
-    },
-    {
-      name: "Pandas",
-      color: "#a855f7",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>`
-    },
-    {
-      name: "NumPy",
-      color: "#4f46e5",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`
-    },
-    {
-      name: "Vector DB",
-      color: "#06b6d4",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="8" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8.5" y1="7" x2="15.5" y2="7.5"/><line x1="7.5" y1="8.5" x2="10.5" y2="15.5"/><line x1="16.5" y1="10.5" x2="13.5" y2="15.5"/></svg>`
+      name: "REST APIs",
+      color: "#c084fc",
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`
     },
     {
       name: "VS Code",
@@ -632,21 +637,6 @@ function init3DSkillSphere() {
       name: "C++",
       color: "#2563eb",
       icon: `<svg viewBox="0 0 24 24" fill="none"><polygon points="12 2 21 7 21 17 12 22 3 17 3 7" stroke="#2563eb" stroke-width="2" fill="rgba(37,99,235,0.15)"/><text x="12" y="15" font-size="8" font-family="monospace" font-weight="bold" fill="#38bdf8" text-anchor="middle">C++</text></svg>`
-    },
-    {
-      name: "REST APIs",
-      color: "#c084fc",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`
-    },
-    {
-      name: "Deep Learning",
-      color: "#ec4899",
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"><circle cx="4" cy="12" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="20" cy="12" r="2"/><line x1="6" y1="12" x2="10" y2="6"/><line x1="6" y1="12" x2="10" y2="18"/><line x1="14" y1="6" x2="18" y2="12"/><line x1="14" y1="18" x2="18" y2="12"/><line x1="12" y1="7" x2="12" y2="17"/></svg>`
-    },
-    {
-      name: "Next.js",
-      color: "#ffffff",
-      icon: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#000000" stroke="#ffffff" stroke-width="1.5"/><path d="M8 8v8l8-9.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/><path d="M15 11v5" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></svg>`
     }
   ];
 
