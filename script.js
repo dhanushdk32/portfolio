@@ -120,10 +120,10 @@ function initRoleTyping() {
   if (!roleEl) return;
 
   const roles = [
-    "SOFTWARE DEVELOPER",
-    "DATA ANALYST",
-    "SOFTWARE ENGINEER",
-    "ML DEVELOPER"
+    "Software Developer",
+    "Data Analyst",
+    "Software Engineer",
+    "ML Developer"
   ];
 
   let roleIndex = 0;
