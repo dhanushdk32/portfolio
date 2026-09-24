@@ -77,7 +77,64 @@
 
   <!-- Main Content -->
   <main>
-    <!-- HERO SECTION -->
+    <!-- INTERACTIVE AI PORTFOLIO ASSISTANT (TOP SECTION MATCHING REFERENCE) -->
+    <section class="section-container ai-assistant-section" id="assistant">
+      <div class="container">
+        <div class="ai-assistant-wrapper reveal-on-scroll">
+          
+          <!-- Avatar & Header matching reference -->
+          <div class="ai-assistant-header">
+            <div class="ai-avatar-container">
+              <div class="ai-avatar-glow"></div>
+              <img src="assets/profile_cutout.png" alt="Dhanush Kumar Avatar" class="ai-avatar-pic">
+              <span class="ai-online-dot" title="AI Assistant Online"></span>
+            </div>
+            
+            <h2 class="ai-chat-heading">Hi, I'm <span class="ai-name-highlight">Dhanush's AI</span></h2>
+            <p class="ai-chat-desc">Ask me anything about Dhanush's data analytics dashboards, ML projects, technical skills, or education!</p>
+          </div>
+
+          <!-- Chat Terminal Card -->
+          <div class="ai-chat-card">
+            <!-- Messages Scroll Area -->
+            <div class="ai-messages-container" id="aiMessages">
+              <!-- Welcome Bot Message -->
+              <div class="ai-message ai-bot-message">
+                <div class="message-bubble">
+                  👋 Hello! I'm Dhanush's AI Assistant. How can I help you? You can ask about his projects, skills, internship experience, education, or how to get in touch!
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Suggestion Chips matching reference -->
+            <div class="ai-chips-wrapper">
+              <div class="ai-chips-list">
+                <button type="button" class="ai-chip" onclick="askAiPrompt('Tell me about your projects')">💼 Projects</button>
+                <button type="button" class="ai-chip" onclick="askAiPrompt('What are your technical skills?')">⚡ Skills</button>
+                <button type="button" class="ai-chip" onclick="askAiPrompt('What internship experience do you have?')">💼 Internships</button>
+                <button type="button" class="ai-chip" onclick="askAiPrompt('What is your education background?')">🎓 Education</button>
+                <button type="button" class="ai-chip" onclick="askAiPrompt('How can I contact Dhanush?')">📞 Contact</button>
+                <button type="button" class="ai-chip" onclick="askAiPrompt('Where can I get your resume?')">📄 Resume</button>
+              </div>
+            </div>
+
+            <!-- Chat Input Form -->
+            <form class="ai-input-form" id="aiChatForm" onsubmit="handleAiChatSubmit(event)">
+              <input type="text" id="aiChatInput" placeholder="Ask anything about Dhanush..." autocomplete="off" required>
+              <button type="submit" class="ai-send-btn" id="aiSendBtn" aria-label="Send question">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE / HERO SECTION -->
     <section class="hero-section" id="hero">
       <div class="container hero-grid">
         <div class="hero-content reveal-on-scroll">
@@ -249,63 +306,6 @@
             <div class="stat-number" style="font-size: 1.7rem;">B.Sc</div>
             <div class="stat-label">AI & MACHINE LEARNING (2021-2024)</div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INTERACTIVE AI PORTFOLIO ASSISTANT (TOP SECTION MATCHING REFERENCE) -->
-    <section class="section-container ai-assistant-section" id="assistant">
-      <div class="container">
-        <div class="ai-assistant-wrapper reveal-on-scroll">
-          
-          <!-- Avatar & Header matching reference -->
-          <div class="ai-assistant-header">
-            <div class="ai-avatar-container">
-              <div class="ai-avatar-glow"></div>
-              <img src="assets/profile_cutout.png" alt="Dhanush Kumar Avatar" class="ai-avatar-pic">
-              <span class="ai-online-dot" title="AI Assistant Online"></span>
-            </div>
-            
-            <h2 class="ai-chat-heading">Hi, I'm <span class="ai-name-highlight">Dhanush's AI</span></h2>
-            <p class="ai-chat-desc">Ask me anything about Dhanush's software projects, analytics dashboards, technical skills, or education!</p>
-          </div>
-
-          <!-- Chat Terminal Card -->
-          <div class="ai-chat-card">
-            <!-- Messages Scroll Area -->
-            <div class="ai-messages-container" id="aiMessages">
-              <!-- Welcome Bot Message -->
-              <div class="ai-message ai-bot-message">
-                <div class="message-bubble">
-                  👋 Hello! I'm Dhanush's AI Assistant. How can I help you? You can ask about his projects, skills, internship experience, education, or how to get in touch!
-                </div>
-              </div>
-            </div>
-
-            <!-- Quick Suggestion Chips matching reference -->
-            <div class="ai-chips-wrapper">
-              <div class="ai-chips-list">
-                <button type="button" class="ai-chip" onclick="askAiPrompt('Tell me about your projects')">💼 Projects</button>
-                <button type="button" class="ai-chip" onclick="askAiPrompt('What are your technical skills?')">⚡ Skills</button>
-                <button type="button" class="ai-chip" onclick="askAiPrompt('What internship experience do you have?')">💼 Internships</button>
-                <button type="button" class="ai-chip" onclick="askAiPrompt('What is your education background?')">🎓 Education</button>
-                <button type="button" class="ai-chip" onclick="askAiPrompt('How can I contact Dhanush?')">📞 Contact</button>
-                <button type="button" class="ai-chip" onclick="askAiPrompt('Where can I get your resume?')">📄 Resume</button>
-              </div>
-            </div>
-
-            <!-- Chat Input Form -->
-            <form class="ai-input-form" id="aiChatForm" onsubmit="handleAiChatSubmit(event)">
-              <input type="text" id="aiChatInput" placeholder="Ask anything about Dhanush..." autocomplete="off" required>
-              <button type="submit" class="ai-send-btn" id="aiSendBtn" aria-label="Send question">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="22" y1="2" x2="11" y2="13"></line>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
-              </button>
-            </form>
-          </div>
-
         </div>
       </div>
     </section>

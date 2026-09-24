@@ -382,7 +382,7 @@ img {
    HERO SECTION (MATCHING REFERENCE UI)
    ========================================================================== */
 .hero-section {
-  padding: 140px 0 60px 0;
+  padding: 80px 0 60px 0;
   position: relative;
 }
 
@@ -1602,7 +1602,7 @@ img {
    AI PORTFOLIO ASSISTANT (FRONTEND CHATBOT MATCHING REFERENCE)
    ========================================================================== */
 .ai-assistant-section {
-  padding: 100px 0 70px 0;
+  padding: 130px 0 60px 0;
   position: relative;
 }
 
@@ -1653,6 +1653,7 @@ img {
   height: 82px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: 50% 10%;
   border: 2px solid rgba(255, 255, 255, 0.2);
   background: #141824;
   position: relative;
